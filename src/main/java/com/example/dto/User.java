@@ -1,8 +1,8 @@
 package com.example.dto;
 
 public class User {
-    private Long id;
-    private String username;
+    private final Long id;
+    private final String username;
 
     public User(Long id, String username) {
         this.id = id;
