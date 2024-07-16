@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: JavaPRO_2
+
+server:
+  servlet:
+    context-path: "/default-path"
+  port: 8080
