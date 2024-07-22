@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ProductDAO {
+public class ProductRepository {
     private final Connection connection;
 
-    public ProductDAO(Connection connection) {
+    public ProductRepository(Connection connection) {
         this.connection = connection;
     }
 
