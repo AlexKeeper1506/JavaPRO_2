@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProductRepository {
@@ -19,7 +20,7 @@ public class ProductRepository {
         this.connection = connection;
     }
 
-    public Product selectByProductId(Long productId) throws SQLException {
+    public Optional<Product> selectByProductId(Long productId) throws SQLException {
         String query = "SELECT account_number, balance, type, user_id " +
                 "FROM products " +
                 "WHERE id = ?";
@@ -42,9 +43,9 @@ public class ProductRepository {
                     userId
             );
 
-            return product;
+            return Optional.of(product);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 
