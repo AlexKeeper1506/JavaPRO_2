@@ -10,16 +10,17 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class ProductDAO {
+public class ProductRepository {
     private final Connection connection;
 
-    public ProductDAO(Connection connection) {
+    public ProductRepository(Connection connection) {
         this.connection = connection;
     }
 
-    public Product selectByProductId(Long productId) throws SQLException {
+    public Optional<Product> selectByProductId(Long productId) throws SQLException {
         String query = "SELECT account_number, balance, type, user_id " +
                 "FROM products " +
                 "WHERE id = ?";
@@ -42,9 +43,9 @@ public class ProductDAO {
                     userId
             );
 
-            return product;
+            return Optional.of(product);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 

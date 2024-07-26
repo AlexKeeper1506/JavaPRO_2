@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserDAO {
+public class UserRepository {
     private final Connection connection;
 
-    public UserDAO(Connection connection) {
+    public UserRepository(Connection connection) {
         this.connection = connection;
     }
 

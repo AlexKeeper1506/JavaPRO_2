@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: payment-service
+
+server:
+  servlet:
+    context-path: "/default-path"
+  port: 8282
+
+integrations:
+  executors:
+    payment-executor-client:
+      url: "http://localhost:8080/default-path"
+      connect-timeout: 1s
+      read-timeot: 30s
+
