@@ -1,52 +1,59 @@
 package com.example.service;
 
-import com.example.dto.User;
-import com.example.repository.UserRepositoryOld;
+import com.example.entity.User;
+import com.example.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
 public class UserService {
-    private final UserRepositoryOld userRepositoryOld;
+    private final UserRepository userRepository;
 
-    public UserService(UserRepositoryOld userRepositoryOld) {
-        this.userRepositoryOld = userRepositoryOld;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public void createUser(User user) {
+    public User createUser(User user) {
         try {
-            userRepositoryOld.insert(user);
+            User newUser = userRepository.save(user);
             System.out.println("Запись была успешно добавлена в таблицу!");
+            return newUser;
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
+        return new User();
     }
 
     public List<User> getAllUsers() {
-        return userRepositoryOld.selectAll();
+        return userRepository.findAll();
     }
 
-    public User getUser(Long userId) throws SQLException {
-        return userRepositoryOld.selectOne(userId);
+    public User getUserById(Long userId) {
+        return userRepository.findByIdWithinProducts(userId).get();
     }
 
-    public void updateUser(User user) {
+    public User updateUser(User user) {
         try {
-            userRepositoryOld.update(user);
+            User updatedUser = userRepository.save(user);
             System.out.println("Запись была успешно изменена!");
+            return updatedUser;
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
+        return new User();
     }
 
-    public void deleteUser(Long userId) {
+    public String deleteUserById(Long userId) {
         try {
-            userRepositoryOld.delete(userId);
-            System.out.println("Запись была успешно удалена!");
+            userRepository.deleteById(userId);
+            return "Запись была успешно удалена!";
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
+        return "Что-то пошло не так!";
     }
 }

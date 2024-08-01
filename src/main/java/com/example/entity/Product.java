@@ -21,6 +21,10 @@ public class Product {
     @Column(name = "type")
     private String type;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -35,5 +39,29 @@ public class Product {
 
     public String getType() {
         return type;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

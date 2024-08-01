@@ -4,14 +4,12 @@ import com.example.entity.Product;
 import com.example.exception.ProductBalanceTooLowException;
 import com.example.exception.ProductNotFoundException;
 import com.example.repository.ProductRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -21,6 +19,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    @Transactional
     public Product getByProductId(Long productId) {
         Product product =  productRepository.findById(productId).orElseThrow(
                 () -> new ProductNotFoundException("There's no product with the given ID", HttpStatus.NOT_FOUND)
@@ -30,7 +29,8 @@ public class ProductService {
         else return product;
     }
 
-    /*public List<Product> getByUserId(Long userId) throws SQLException {
-        return productRepository.selectByUserId(userId);
-    }*/
+    @Transactional
+    public List<Product> getByUserId(Long userId) {
+        return productRepository.findByUserId(userId);
+    }
 }

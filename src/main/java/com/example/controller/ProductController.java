@@ -4,7 +4,6 @@ import com.example.entity.Product;
 import com.example.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -17,12 +16,12 @@ public class ProductController {
     }
 
     @GetMapping(value = "/getByProductId")
-    public Product getByProductId(@RequestParam(name = "id") Long productId) throws SQLException {
+    public Product getByProductId(@RequestParam(name = "id") Long productId) {
         return productService.getByProductId(productId);
     }
 
-    /*@GetMapping(value = "/getByUserId")
-    public List<Product> getByUserId(@RequestParam(name = "id") Long userId) throws SQLException {
+    @GetMapping(value = "/getByUserId")
+    public List<Product> getByUserId(@RequestParam(name = "id") Long userId) {
         return productService.getByUserId(userId);
-    }*/
+    }
 }
