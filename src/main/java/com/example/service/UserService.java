@@ -1,7 +1,9 @@
 package com.example.service;
 
+import com.example.dto.UserResponseDto;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +32,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long userId) {
-        return userRepository.findByIdWithinProducts(userId).get();
+    public UserResponseDto getUserById(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+
+        UserResponseDto userDto = new UserResponseDto(
+                user.getId(),
+                user.getUsername()
+        );
+
+        return userDto;
     }
 
     public User updateUser(User user) {

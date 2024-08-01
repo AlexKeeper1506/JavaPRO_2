@@ -1,6 +1,5 @@
 package com.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -23,7 +22,6 @@ public class User {
     private String username;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private Set<Product> products;
 
     public Long getId() {

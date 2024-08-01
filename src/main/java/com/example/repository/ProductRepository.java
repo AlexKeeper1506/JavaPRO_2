@@ -9,7 +9,8 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @Query("SELECT p FROM Product p WHERE p.user = " +
-            "(SELECT u FROM User u WHERE u.id = :userId)")
+    @Query(value = "SELECT id, account_number, balance, type, user_id " +
+            "FROM products " +
+            "WHERE user_id = :userId", nativeQuery = true)
     List<Product> findByUserId(Long userId);
 }

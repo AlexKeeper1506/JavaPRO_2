@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.ErrorResponseDto;
 import com.example.exception.ProductBalanceTooLowException;
 import com.example.exception.ProductNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -15,6 +16,15 @@ public class ControllerAdvice {
     public ErrorResponseDto handleProductNotFoundException(ProductNotFoundException exception) {
         return new ErrorResponseDto(
                 exception.getHttpStatus().value(),
+                exception.getMessage()
+        );
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public ErrorResponseDto handleEntityNotFoundException(EntityNotFoundException exception) {
+        return new ErrorResponseDto(
+                HttpStatus.NOT_FOUND.value(),
                 exception.getMessage()
         );
     }
