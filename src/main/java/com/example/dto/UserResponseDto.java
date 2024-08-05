@@ -1,10 +1,10 @@
 package com.example.dto;
 
-public class User {
+public class UserResponseDto {
     private final Long id;
     private final String username;
 
-    public User(Long id, String username) {
+    public UserResponseDto(Long id, String username) {
         this.id = id;
         this.username = username;
     }
@@ -15,13 +15,5 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                '}';
     }
 }

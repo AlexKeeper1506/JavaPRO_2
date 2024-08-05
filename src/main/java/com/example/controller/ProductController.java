@@ -1,11 +1,11 @@
 package com.example.controller;
 
-import com.example.dto.Product;
+import com.example.dto.ProductResponseDto;
 import com.example.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/product")
@@ -17,12 +17,17 @@ public class ProductController {
     }
 
     @GetMapping(value = "/getByProductId")
-    public Product getByProductId(@RequestParam(name = "id") Long productId) throws SQLException {
+    public ProductResponseDto getByProductId(@RequestParam(name = "id") Long productId) {
         return productService.getByProductId(productId);
     }
 
     @GetMapping(value = "/getByUserId")
-    public List<Product> getByUserId(@RequestParam(name = "id") Long userId) throws SQLException {
+    public List<ProductResponseDto> getByUserId(@RequestParam(name = "id") Long userId) {
         return productService.getByUserId(userId);
+    }
+
+    @GetMapping(value = "/getByUserIdSet")
+    public Set<ProductResponseDto> getByUserIdSet(@RequestParam(name = "id") Long userId) {
+        return productService.getByUserIdSet(userId);
     }
 }
