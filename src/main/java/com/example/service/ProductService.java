@@ -67,6 +67,28 @@ public class ProductService {
         return productDtoList;
     }
 
+    @Transactional
+    public List<ProductResponseDto> getByUser(Long userId) {
+        User user = new User();
+        user.setId(userId);
+
+        List<Product> productList = productRepository.findByUser(user);
+
+        List<ProductResponseDto> productDtoList = new ArrayList<>();
+
+        for (Product product : productList) {
+            productDtoList.add(new ProductResponseDto(
+                    product.getId(),
+                    product.getAccountNumber(),
+                    product.getBalance(),
+                    product.getType(),
+                    product.getUser().getId()
+            ));
+        }
+
+        return productDtoList;
+    }
+
     public Set<ProductResponseDto> getByUserIdSet(Long userId) {
         User user = userRepository.findByIdWithinProducts(userId).orElseThrow(EntityNotFoundException::new);
 

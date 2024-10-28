@@ -26,6 +26,11 @@ public class ProductController {
         return productService.getByUserId(userId);
     }
 
+    @GetMapping(value = "/getByUser")
+    public List<ProductResponseDto> getByUser(@RequestParam(name = "id") Long userId) {
+        return productService.getByUser(userId);
+    }
+
     @GetMapping(value = "/getByUserIdSet")
     public Set<ProductResponseDto> getByUserIdSet(@RequestParam(name = "id") Long userId) {
         return productService.getByUserIdSet(userId);
